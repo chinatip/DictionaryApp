@@ -18,8 +18,7 @@ import java.util.List;
 
 public class AddWordActivity extends AppCompatActivity {
     private Button saveButton,cancelButton;
-    private TextView AddWord;
-    private EditText trans;
+    private EditText AddWord, trans;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +28,7 @@ public class AddWordActivity extends AppCompatActivity {
     }
 
     private void initComponent(){
-        AddWord = (TextView) findViewById(R.id.AddWord);
+        AddWord = (EditText) findViewById(R.id.AddWord);
         trans = (EditText) findViewById(R.id.trans);
         saveButton = (Button) findViewById(R.id.saveButton);
         saveButton.setOnClickListener(new View.OnClickListener(){

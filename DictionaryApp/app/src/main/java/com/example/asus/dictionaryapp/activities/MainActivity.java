@@ -49,7 +49,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         editButton = (ImageButton) findViewById(R.id.editButton);
+        wordsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
+                Intent intent = new Intent(MainActivity.this, WordActivity.class);
+                intent.putExtra("word", words.get(i));
+                startActivity(intent);
+
+            }
+        });
         wordsAdapter = new WordAdapter(this, R.layout.word_list, words);
         wordsList.setAdapter(wordsAdapter);
     }
