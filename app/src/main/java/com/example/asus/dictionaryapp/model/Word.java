@@ -53,13 +53,13 @@ public class Word implements Serializable {
 
     public String getWord() {return word;}
 
-    public List<String> getTranslations() {return translations;}
+    public ArrayList<String> getTranslations() {return translations;}
 
     public void addAllSynonyms(Collection<String> syns) {
         synonyms.addAll(syns);
     }
 
-    public List<String> getSynonyms() {
+    public ArrayList<String> getSynonyms() {
         return synonyms;
     }
 }

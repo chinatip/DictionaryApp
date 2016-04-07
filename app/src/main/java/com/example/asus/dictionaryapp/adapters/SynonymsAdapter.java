@@ -11,15 +11,11 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.asus.dictionaryapp.R;
-import com.example.asus.dictionaryapp.model.Word;
 
-import java.util.ArrayList;
 import java.util.List;
 
-
-public class WordListAdapter extends ArrayAdapter<Word> {
-
-    public WordListAdapter(Context context, int resource, ArrayList<Word> objects){
+public class SynonymsAdapter extends ArrayAdapter<String> {
+    public SynonymsAdapter(Context context, int resource, List<String> objects){
         super(context, resource, objects);
     }
 
@@ -32,8 +28,8 @@ public class WordListAdapter extends ArrayAdapter<Word> {
             v = vi.inflate(R.layout.word_list, null);
         }
         TextView word = (TextView) v.findViewById(R.id.word);
-
-        word.setText(getItem(position).getWord());
+        word.setText(getItem(position));
+        v.setTag(getItem(position));
         return v;
     }
 }
