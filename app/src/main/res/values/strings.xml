@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Hello Dictionary!!</string>
+    <string name="title_activity_word">WordActivity</string>
+</resources>
