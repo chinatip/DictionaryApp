@@ -19,7 +19,7 @@ import java.util.List;
 
 public class AddWordActivity extends AppCompatActivity {
     private Button saveButton,cancelButton;
-    private EditText AddWord, trans;
+    private EditText AddWord, trans, syns;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,8 @@ public class AddWordActivity extends AppCompatActivity {
 
     private void initComponent(){
         AddWord = (EditText) findViewById(R.id.AddWord);
-        trans = (EditText) findViewById(R.id.trans);
+        trans = (EditText) findViewById(R.id.transAdd);
+        syns = (EditText) findViewById(R.id.synsAdd);
         saveButton = (Button) findViewById(R.id.saveButton);
         saveButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -56,8 +57,15 @@ public class AddWordActivity extends AppCompatActivity {
         for (int i = 0; i< transArray.length; i++) {
             transList.add(transArray[i].trim());
         }
+
+        String [] synsArray = syns.getText().toString().split(",");
+        List<String> synsList = new ArrayList<String>();
+        for (int i = 0; i< synsArray.length; i++) {
+            synsList.add(synsArray[i].trim());
+        }
         Word word = new Word(AddWord.getText().toString());
         word.addAllTranslations(transList);
+        word.addAllSynonyms(synsList);
         try {
             Storage.getInstance().saveWord(this, word);
         } catch (JSONException e) {

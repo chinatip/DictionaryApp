@@ -37,21 +37,20 @@
         android:layout_height="wrap_content"
         android:text="Word "
         android:id="@+id/textView"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="25dp"
         android:textSize="29dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginStart="30dp"
+        android:layout_marginLeft="29dp"
+        android:layout_marginStart="29dp"
+        android:textStyle="bold"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textStyle="bold"
-        />
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/AddWord"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="10dp"
         android:textSize="16dp"
         android:hint="Type word here"
         android:layout_below="@+id/textView"
@@ -61,13 +60,13 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/trans"
+        android:id="@+id/transAdd"
         android:textSize="14dp"
         android:hint="Type Translation of word here"
         android:layout_below="@+id/AddWord"
         android:layout_alignLeft="@+id/AddWord"
         android:layout_alignStart="@+id/AddWord"
-        android:layout_marginTop="108dp" />
+        android:layout_marginTop="71dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -79,16 +78,50 @@
         android:layout_below="@+id/AddWord"
         android:layout_alignLeft="@+id/AddWord"
         android:layout_alignStart="@+id/AddWord"
-        android:layout_marginTop="33dp" />
+        android:layout_marginTop="13dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" ex. Trans1, Trans2, Trans3, ..."
         android:id="@+id/textView3"
+        android:textColor="#34282C"
         android:layout_below="@+id/textView2"
         android:layout_alignLeft="@+id/textView2"
         android:layout_alignStart="@+id/textView2"
         android:textStyle="italic"
         />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/synsAdd"
+        android:textSize="14dp"
+        android:hint="Type Synonyms of word here"
+        android:layout_below="@+id/textView5"
+        android:layout_alignLeft="@+id/textView5"
+        android:layout_alignStart="@+id/textView5"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Synonyms"
+        android:id="@+id/textView4"
+        android:textSize="29dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/transAdd"
+        android:layout_alignLeft="@+id/transAdd"
+        android:layout_alignStart="@+id/transAdd"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" ex. a, b, c"
+        android:id="@+id/textView5"
+        android:textColor="#34282C"
+        android:textStyle="italic"
+        android:layout_below="@+id/textView4"
+        android:layout_alignLeft="@+id/transAdd" />
 </RelativeLayout>

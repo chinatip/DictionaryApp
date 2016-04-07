@@ -12,7 +12,8 @@ public class Word implements Serializable {
     private String word;
     private int resource;
     private boolean isChecked = false;
-    private List<String> translations = new ArrayList<String>();
+    private ArrayList<String> translations = new ArrayList<String>();
+    private ArrayList<String> synonyms = new ArrayList<String>();
 
     public Word(String word){
         this.word = word.toLowerCase();
@@ -54,4 +55,11 @@ public class Word implements Serializable {
 
     public List<String> getTranslations() {return translations;}
 
+    public void addAllSynonyms(Collection<String> syns) {
+        synonyms.addAll(syns);
+    }
+
+    public List<String> getSynonyms() {
+        return synonyms;
+    }
 }

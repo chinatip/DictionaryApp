@@ -25,7 +25,7 @@ import java.util.Observer;
 public class EditWordActivity extends AppCompatActivity{
     private Word word;
     private TextView wordText;
-    private EditText transText;
+    private EditText transText, synsText;
     private ImageButton saveButton,cancelButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +42,10 @@ public class EditWordActivity extends AppCompatActivity{
         transText = (EditText) findViewById(R.id.transText);
         String trans = word.getTranslations().toString();
         transText.setText(trans.substring(1, trans.length() - 1));
+        synsText = (EditText) findViewById(R.id.synsText);
+        String syns = word.getSynonyms().toString();
+        synsText.setText(syns.substring(1, syns.length() - 1));
+
         saveButton = (ImageButton) findViewById(R.id.saveButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +74,7 @@ public class EditWordActivity extends AppCompatActivity{
         tempWord.addAllTranslations(transList);
         try {
             Storage.getInstance().saveWord(this, tempWord);
-            //Storage.getInstance().deleteWord(this,word);
+            Storage.getInstance().deleteWord(this,word);
         } catch (JSONException e) {
             e.printStackTrace();
         }
