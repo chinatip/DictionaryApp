@@ -10,7 +10,6 @@ import java.util.List;
 
 public class Word implements Serializable {
     private String word;
-    private int resource;
     private boolean isChecked = false;
     private ArrayList<String> translations = new ArrayList<String>();
     private ArrayList<String> synonyms = new ArrayList<String>();
@@ -27,28 +26,8 @@ public class Word implements Serializable {
         this.isChecked = isChecked;
     }
 
-    public int getResource() {
-        return resource;
-    }
-
-    public void setResource(int resource) {
-        this.resource = resource;
-    }
-
-    public void addTranslation(String trans){
-        translations.add(trans);
-    }
-
     public void addAllTranslations(Collection<String> trans){
         translations.addAll(trans);
-    }
-
-    public void deleteTranslation(String trans){
-        translations.remove(trans);
-    }
-
-    public void deleteAllTranslations(){
-        translations = new ArrayList<String>();
     }
 
     public String getWord() {return word;}

@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
         loadWords();
     }
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void loadWords() {
+    public void loadWords() {
         try {
             words.clear();
             for(Word n: Storage.getInstance().loadWords(this)) {

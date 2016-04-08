@@ -90,6 +90,7 @@ public class WordActivity extends AppCompatActivity{
     private void deleteThisWord() {
         try {
             Storage.getInstance().deleteWord(this, word);
+            MainActivity.update();
         } catch (JSONException e) {
             e.printStackTrace();
         }

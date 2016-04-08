@@ -32,7 +32,7 @@ public class Storage {
         if(wordsJson == null || wordsJson.trim().equals("")) {
             return null;
         }
-        Type type = new TypeToken< List < Word >>() {}.getType();
+        Type type = new TypeToken< ArrayList < Word >>() {}.getType();
         ArrayList<Word> words = new Gson().fromJson(wordsJson, type);
         for(Word w:words){
             if(w.getWord().equals(s)) {
@@ -42,27 +42,45 @@ public class Storage {
         return null;
     }
 
+    public void editWord(Context context, Word removeWord, Word saveWord) throws JSONException {
+        editor = context.getSharedPreferences(DB, context.MODE_PRIVATE).edit();
+        ArrayList<Word> words = loadWords(context);
+        words.remove(removeWord);
+        words.add(saveWord);
+        saveWordsJson(new Gson().toJson(words));
+    }
 
     public void saveWord(Context context, Word word) throws JSONException {
         editor = context.getSharedPreferences(DB, context.MODE_PRIVATE).edit();
-        List<Word> words = loadWords(context);
+        ArrayList<Word> words = loadWords(context);
+        for (int i = 0; i< words.size(); i++) {
+            Word w = words.get(i);
+            if(w.getWord().equalsIgnoreCase(word.getWord())){
+                words.remove(w);
+            }
+        }
         words.add(word);
         saveWordsJson(new Gson().toJson(words));
     }
 
     public void deleteWord(Context context, Word word) throws JSONException {
         editor =  context.getSharedPreferences(DB, Context.MODE_PRIVATE).edit();
-        List<Word> words = loadWords(context);
-        words.remove(word);
+        ArrayList<Word> words = loadWords(context);
+        for (int i = 0; i< words.size(); i++) {
+            Word w = words.get(i);
+            if(w.getWord().equals(word.getWord())){
+                words.remove(w);
+            }
+        }
         saveWordsJson(new Gson().toJson(words));
     }
 
-    public  List<Word> loadWords(Context context) throws JSONException {
+    public  ArrayList<Word> loadWords(Context context) throws JSONException {
         String wordsJson = context.getSharedPreferences(DB, Context.MODE_PRIVATE).getString(DB, null);
         if(wordsJson == null || wordsJson.trim().equals("")) {
             return new ArrayList<Word>();
         }
-        Type type = new TypeToken< List < Word >>() {}.getType();
+        Type type = new TypeToken< ArrayList < Word >>() {}.getType();
         return new Gson().fromJson(wordsJson, type);
     }
 

@@ -47,10 +47,12 @@ public class EditWordListActivity extends AppCompatActivity implements android.w
                 if (markAll.isChecked()) {
                     for (Word w : wordList) {
                         w.setIsChecked(true);
+
                     }
                 } else {
                     for (Word w : wordList) {
                         w.setIsChecked(false);
+
                     }
                 }
             }
@@ -65,7 +67,7 @@ public class EditWordListActivity extends AppCompatActivity implements android.w
         });
     }
     private void displayWordList() {
-        adapter = new EditWordListAdapter(this, R.layout.word_list_edit, wordList);
+        adapter = new EditWordListAdapter(this, wordList);
         lv.setAdapter(adapter);
     }
     private void loadWords() {
@@ -86,6 +88,7 @@ public class EditWordListActivity extends AppCompatActivity implements android.w
             if(w.isChecked()) {
                 try {
                     Storage.getInstance().deleteWord(this,w);
+                    MainActivity.update();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

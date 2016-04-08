@@ -70,11 +70,17 @@ public class EditWordActivity extends AppCompatActivity{
         for (int i = 0; i< transArray.length; i++) {
             transList.add(transArray[i].trim());
         }
+        String [] synsArray = synsText.getText().toString().split(",");
+        List<String> synsList = new ArrayList<String>();
+        for (int i = 0; i< synsArray.length; i++) {
+            synsList.add(synsArray[i].trim());
+        }
         Word tempWord = new Word(wordText.getText().toString());
         tempWord.addAllTranslations(transList);
+        tempWord.addAllSynonyms(synsList);
         try {
-            Storage.getInstance().saveWord(this, tempWord);
-            Storage.getInstance().deleteWord(this,word);
+            Storage.getInstance().saveWord(this,tempWord);
+            //MainActivity.update();
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -21,7 +21,7 @@ import java.util.List;
 public class EditWordListAdapter extends ArrayAdapter<Word> {
     private List<Word> wordList;
     private Context context;
-    public EditWordListAdapter(Context context,int resource, ArrayList<Word> wordList){
+    public EditWordListAdapter(Context context, ArrayList<Word> wordList){
         super(context, R.layout.word_list_edit, wordList);
         this.wordList = wordList;
         this.context = context;
@@ -34,18 +34,18 @@ public class EditWordListAdapter extends ArrayAdapter<Word> {
         View v = convertView;
         WordHolder holder = new WordHolder();
 
-        if(convertView == null) {
-            LayoutInflater vi = LayoutInflater.from(getContext());
+        if(v == null) {
+            LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = vi.inflate(R.layout.word_list_edit, null);
             holder.word = (TextView) v.findViewById(R.id.word);
             holder.checkBox = (CheckBox) v.findViewById(R.id.checkBox);
-
             holder.checkBox.setOnCheckedChangeListener((EditWordListActivity) context);
+            v.setTag(holder);
         }else{
             holder = (WordHolder)v.getTag();
         }
 
-        Word w = wordList.get(position);
+        Word w = getItem(position);
         holder.word.setText(w.getWord());
         holder.checkBox.setChecked(w.isChecked());
         holder.checkBox.setTag(w);
