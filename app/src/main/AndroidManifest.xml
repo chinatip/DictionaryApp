@@ -15,10 +15,33 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.AddWordActivity" />
-        <activity android:name=".activities.WordActivity" />
+        <activity
+            android:name=".activities.WordActivity"
+            android:parentActivityName=".activities.MainActivity"
+            android:label="">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value= "com.example.asus.dictionaryapp.activities.MainActivity" />
+
+        </activity>
+
+        <activity
+            android:name=".activities.AddWordActivity"
+            android:parentActivityName=".activities.MainActivity"
+            android:label="">
+            <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value= "com.example.asus.dictionaryapp.activities.MainActivity" />
+        </activity>
         <activity android:name=".activities.EditWordActivity" />
-        <activity android:name=".activities.EditWordListActivity"></activity>
+        <activity
+            android:name=".activities.EditWordListActivity"
+            android:parentActivityName=".activities.MainActivity"
+            android:label="">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value= "com.example.asus.dictionaryapp.activities.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

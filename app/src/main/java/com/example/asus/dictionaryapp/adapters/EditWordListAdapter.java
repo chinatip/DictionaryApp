@@ -19,8 +19,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EditWordListAdapter extends ArrayAdapter<Word> {
+    public boolean flag = false;
     private List<Word> wordList;
     private Context context;
+    public static ArrayList<CheckBox> checkBoxes = new ArrayList<>();
+
     public EditWordListAdapter(Context context, ArrayList<Word> wordList){
         super(context, R.layout.word_list_edit, wordList);
         this.wordList = wordList;
@@ -49,7 +52,9 @@ public class EditWordListAdapter extends ArrayAdapter<Word> {
         holder.word.setText(w.getWord());
         holder.checkBox.setChecked(w.isChecked());
         holder.checkBox.setTag(w);
+        checkBoxes.add(holder.checkBox);
         return v;
     }
 
+    public ArrayList<CheckBox> getCheckBoxes() { return checkBoxes;}
 }

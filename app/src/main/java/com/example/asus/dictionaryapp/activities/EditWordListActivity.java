@@ -3,6 +3,9 @@
  */
 package com.example.asus.dictionaryapp.activities;
 
+import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import com.example.asus.dictionaryapp.R;
 import com.example.asus.dictionaryapp.adapters.EditWordListAdapter;
@@ -10,7 +13,9 @@ import com.example.asus.dictionaryapp.model.Word;
 import com.example.asus.dictionaryapp.util.Storage;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
@@ -26,7 +31,7 @@ public class EditWordListActivity extends AppCompatActivity implements android.w
     private ListView lv;
     private EditWordListAdapter adapter;
     private ArrayList<Word> wordList = new ArrayList<>();
-    private CheckBox markAll;
+    private Button markAll;
 
 
     @Override
@@ -35,30 +40,43 @@ public class EditWordListActivity extends AppCompatActivity implements android.w
         setContentView(R.layout.activity_edit_word_list);
         initComponents();
         loadWords();
+        ActionBar actionBar = getActionBar();
     }
 
     private void initComponents(){
         lv = (ListView)findViewById(R.id.wordListView);
         displayWordList();
-        markAll = (CheckBox) findViewById(R.id.markAllCheckBox);
+        final ArrayList<CheckBox> checkBoxes = adapter.getCheckBoxes();
+        markAll = (Button) findViewById(R.id.deleteAllButton);
         markAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (markAll.isChecked()) {
-                    for (int i =0;i<wordList.size();i++) {
-                        Word w = wordList.get(i);
-                        w.setIsChecked(true);
-                        CheckBox box = (CheckBox)lv.getAdapter().getView(i,v,lv).findViewById(R.id.checkBox);
-                        //CheckBox b = (CheckBox)adapter.getHolder().
-
-                    }
-                } else {
-                    for (int i =0;i<wordList.size();i++) {
-                        Word w = wordList.get(i);
-                        w.setIsChecked(false);
-
-                    }
+                for (int i =0;i<wordList.size();i++) {
+                    Word w = wordList.get(i);
+                    w.setIsChecked(true);
+                    checkBoxes.get(i).setChecked(true);
+                    Log.e("All", checkBoxes.size() + "");
                 }
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                deleteWords();
+                                finish();
+                                MainActivity.update();
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //No button clicked
+                                break;
+                        }
+                    }
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
             }
         });
         deleteButton = (ImageButton) findViewById(R.id.deleteButton);

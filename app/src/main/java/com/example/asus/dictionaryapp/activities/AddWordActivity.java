@@ -3,6 +3,7 @@
  */
 package com.example.asus.dictionaryapp.activities;
 
+import android.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -26,6 +27,7 @@ public class AddWordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_word);
         initComponent();
+        ActionBar actionBar = getActionBar();
     }
 
     private void initComponent(){

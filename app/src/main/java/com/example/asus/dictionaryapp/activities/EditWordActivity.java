@@ -3,6 +3,7 @@
  */
 package com.example.asus.dictionaryapp.activities;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,6 +35,7 @@ public class EditWordActivity extends AppCompatActivity{
         Intent intent = getIntent();
         word = (Word)intent.getSerializableExtra("word");
         initComponents();
+        ActionBar actionBar = getActionBar();
     }
 
     private void initComponents() {

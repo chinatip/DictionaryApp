@@ -3,9 +3,11 @@
  */
 package com.example.asus.dictionaryapp.activities;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
@@ -35,6 +37,8 @@ public class WordActivity extends AppCompatActivity{
         Intent intent = getIntent();
         word = (Word)intent.getSerializableExtra("word");
         initComponents();
+        ActionBar actionBar = getActionBar();
+        //actionBar.setHomeButtonEnabled(true);
     }
 
     private void initComponents() {
@@ -85,6 +89,15 @@ public class WordActivity extends AppCompatActivity{
                 startActivity(intent);
             }
         });
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            Intent i = new Intent(WordActivity.this, MainActivity.class);
+            startActivity(i);
+            return true;
+        }
+        return false;
     }
 
     private void deleteThisWord() {
