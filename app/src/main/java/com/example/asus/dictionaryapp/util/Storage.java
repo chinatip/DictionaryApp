@@ -53,13 +53,17 @@ public class Storage {
     public void saveWord(Context context, Word word) throws JSONException {
         editor = context.getSharedPreferences(DB, context.MODE_PRIVATE).edit();
         ArrayList<Word> words = loadWords(context);
+        boolean isSave = false;
         for (int i = 0; i< words.size(); i++) {
             Word w = words.get(i);
             if(w.getWord().equalsIgnoreCase(word.getWord())){
-                words.remove(w);
+                w.setAllSynonyms(word.getSynonyms());
+                w.setAllTranslations(word.getTranslations());
+                isSave = true;
             }
         }
-        words.add(word);
+        if(!isSave)
+            words.add(word);
         saveWordsJson(new Gson().toJson(words));
     }
 

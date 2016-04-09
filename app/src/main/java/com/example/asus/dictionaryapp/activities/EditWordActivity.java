@@ -50,8 +50,10 @@ public class EditWordActivity extends AppCompatActivity{
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                save();
-                finish();
+                Word w = save();
+                Intent intent = new Intent(EditWordActivity.this, WordActivity.class);
+                intent.putExtra("word", w);
+                startActivity(intent);
             }
         });
         cancelButton = (ImageButton) findViewById(R.id.cancelButton);
@@ -64,7 +66,7 @@ public class EditWordActivity extends AppCompatActivity{
         });
     }
 
-    private void save(){
+    private Word save(){
         String [] transArray = transText.getText().toString().split(",");
         List<String> transList = new ArrayList<String>();
         for (int i = 0; i< transArray.length; i++) {
@@ -84,5 +86,6 @@ public class EditWordActivity extends AppCompatActivity{
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        return tempWord;
     }
 }

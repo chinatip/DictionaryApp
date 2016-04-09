@@ -45,12 +45,16 @@ public class EditWordListActivity extends AppCompatActivity implements android.w
             @Override
             public void onClick(View v) {
                 if (markAll.isChecked()) {
-                    for (Word w : wordList) {
+                    for (int i =0;i<wordList.size();i++) {
+                        Word w = wordList.get(i);
                         w.setIsChecked(true);
+                        CheckBox box = (CheckBox)lv.getAdapter().getView(i,v,lv).findViewById(R.id.checkBox);
+                        //CheckBox b = (CheckBox)adapter.getHolder().
 
                     }
                 } else {
-                    for (Word w : wordList) {
+                    for (int i =0;i<wordList.size();i++) {
+                        Word w = wordList.get(i);
                         w.setIsChecked(false);
 
                     }

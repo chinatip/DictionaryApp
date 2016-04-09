@@ -6,7 +6,6 @@ package com.example.asus.dictionaryapp.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 public class Word implements Serializable {
     private String word;
@@ -30,6 +29,10 @@ public class Word implements Serializable {
         translations.addAll(trans);
     }
 
+    public void setAllTranslations(Collection<String> trans){
+        this.translations= (ArrayList<String>) trans;
+    }
+
     public String getWord() {return word;}
 
     public ArrayList<String> getTranslations() {return translations;}
@@ -37,6 +40,8 @@ public class Word implements Serializable {
     public void addAllSynonyms(Collection<String> syns) {
         synonyms.addAll(syns);
     }
+
+    public void setAllSynonyms(Collection<String> syns) {synonyms = (ArrayList<String>) syns;}
 
     public ArrayList<String> getSynonyms() {
         return synonyms;
