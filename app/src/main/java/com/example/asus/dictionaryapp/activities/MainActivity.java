@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -81,15 +82,15 @@ public class MainActivity extends AppCompatActivity {
 
             public boolean onItemLongClick(AdapterView<?> arg0, View v, int i, long arg3) {
                 Word w = words.get(i);
-                if (w.getIsPinned()) {
+//               change from if(w.getIsPinned()) to if (w.isChecked())
+                if (w.isChecked()) {
                     w.setIsChecked(false);
-                    wordsAdapter.setState(1);
                     wordsAdapter.notifyDataSetChanged();
                 } else {
                     w.setIsChecked(true);
-                    wordsAdapter.setState(0);
                     wordsAdapter.notifyDataSetChanged();
                 }
+                Storage.getInstance().save(MainActivity.this,words);
                 return true;
             }
         });
