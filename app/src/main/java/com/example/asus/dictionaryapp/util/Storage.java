@@ -45,8 +45,8 @@ public class Storage {
     public void editWord(Context context, Word removeWord, Word saveWord) throws JSONException {
         editor = context.getSharedPreferences(DB, context.MODE_PRIVATE).edit();
         ArrayList<Word> words = loadWords(context);
-        deleteWord(context,removeWord);
-        saveWord(context,saveWord);
+        words.remove(removeWord);
+        words.add(saveWord);
         saveWordsJson(new Gson().toJson(words));
     }
 
