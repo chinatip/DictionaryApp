@@ -4,6 +4,8 @@
 package com.example.asus.dictionaryapp.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -75,27 +77,47 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            public boolean onItemLongClick(AdapterView<?> arg0, View v, int i, long arg3) {
+                Word w = words.get(i);
+                if (w.getIsPinned()) {
+                    w.setIsChecked(false);
+                    wordsAdapter.setState(1);
+                    wordsAdapter.notifyDataSetChanged();
+                } else {
+                    w.setIsChecked(true);
+                    wordsAdapter.setState(0);
+                    wordsAdapter.notifyDataSetChanged();
+                }
+                return true;
+            }
+        });
         searchText = (EditText) findViewById(R.id.searchText);
         searchText.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable arg0) {
                 ArrayList<Word> src_list = new ArrayList<Word>();
                 int textlength = searchText.getText().length();
-                for(int i = 0 ; i < words.size() ; i++){
+                for (int i = 0; i < words.size(); i++) {
                     try {
-                        if(searchText.getText().toString()
+                        if (searchText.getText().toString()
                                 .equalsIgnoreCase(words.get(i).getWord()
                                         .subSequence(0, textlength)
-                                        .toString())){
+                                        .toString())) {
                             src_list.add(words.get(i));
                         }
-                    } catch (Exception e) { }
+                    } catch (Exception e) {
+                    }
                 }
                 lv.setAdapter(new WordListAdapter(MainActivity.this
                         , R.layout.word_list
                         , src_list));
             }
+
             public void beforeTextChanged(CharSequence s, int start
-                    , int count, int after) { }
+                    , int count, int after) {
+            }
+
             public void onTextChanged(CharSequence s, int start
                     , int before, int count) { }
 

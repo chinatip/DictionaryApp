@@ -4,6 +4,7 @@
 package com.example.asus.dictionaryapp.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,9 @@ import java.util.List;
 
 
 public class WordListAdapter extends ArrayAdapter<Word> {
-
+    int state =0;
+    //0 - not pin
+    //1 - pin
     public WordListAdapter(Context context, int resource, ArrayList<Word> objects){
         super(context, resource, objects);
     }
@@ -32,8 +35,15 @@ public class WordListAdapter extends ArrayAdapter<Word> {
             v = vi.inflate(R.layout.word_list, null);
         }
         TextView word = (TextView) v.findViewById(R.id.word);
-
         word.setText(getItem(position).getWord());
+        if(state==1)
+            word.setTextColor(Color.RED);
+        else
+            word.setTextColor(Color.GRAY);
         return v;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 }

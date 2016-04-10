@@ -9,7 +9,7 @@ import java.util.Collection;
 
 public class Word implements Serializable {
     private String word;
-    private boolean isChecked = false;
+    private boolean isChecked = false, isPinned = false;
     private ArrayList<String> translations = new ArrayList<String>();
     private ArrayList<String> synonyms = new ArrayList<String>();
 
@@ -46,4 +46,8 @@ public class Word implements Serializable {
     public ArrayList<String> getSynonyms() {
         return synonyms;
     }
+
+    public boolean getIsPinned() {return isPinned;}
+
+    public void setPinned(boolean b) { this.isPinned = isPinned;}
 }
