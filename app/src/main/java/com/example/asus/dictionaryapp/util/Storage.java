@@ -45,8 +45,8 @@ public class Storage {
     public void editWord(Context context, Word removeWord, Word saveWord) throws JSONException {
         editor = context.getSharedPreferences(DB, context.MODE_PRIVATE).edit();
         ArrayList<Word> words = loadWords(context);
-        words.remove(removeWord);
-        words.add(saveWord);
+        deleteWord(context,removeWord);
+        saveWord(context,saveWord);
         saveWordsJson(new Gson().toJson(words));
     }
 
@@ -96,5 +96,9 @@ public class Storage {
     private void saveWordsJson(String wordJson) {
         editor.putString(DB, wordJson);
         editor.commit();
+    }
+    public void save(Context context,ArrayList<Word> words){
+        editor =  context.getSharedPreferences(DB, Context.MODE_PRIVATE).edit();
+        saveWordsJson(new Gson().toJson(words));
     }
 }
