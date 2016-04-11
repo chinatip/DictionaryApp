@@ -1,49 +1,81 @@
-/**
- * Created by Chinatip Vichian 5710546551
- */
-package com.example.asus.dictionaryapp.adapters;
+package com.example.asus.dictionaryapp.activities;
 
-import android.annotation.TargetApi;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
-import android.view.LayoutInflater;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
+import android.widget.AdapterView;
+import android.widget.ImageButton;
+import android.widget.ListView;
 
 import com.example.asus.dictionaryapp.R;
+import com.example.asus.dictionaryapp.adapters.WordAdapter;
 import com.example.asus.dictionaryapp.model.Word;
+import com.example.asus.dictionaryapp.util.Storage;
+
+import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
+public class MainActivity extends AppCompatActivity {
+    private ImageButton addButton, editButton;
+    public ListView wordsList;
+    private static WordAdapter wordsAdapter;
+    private List<Word> words;
 
-public class WordListAdapter extends ArrayAdapter<Word> {
-    public WordListAdapter(Context context, int resource, ArrayList<Word> objects){
-        super(context, resource, objects);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        initComponents();
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View v = convertView;
+    @Override
+    protected void onStart() {
+        super.onStart();
+        loadWords();
+    }
 
-        if (v == null) {
-            LayoutInflater vi;
-            vi = LayoutInflater.from(getContext());
-            v = vi.inflate(R.layout.word_list, null);
+    private void initComponents() {
+        wordsList = (ListView)findViewById(R.id.wordListView);
+        words = new ArrayList<Word>();
+        addButton = (ImageButton) findViewById(R.id.addButton);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, AddWordActivity.class);
+                startActivity(intent);
+            }
+        });
+        editButton = (ImageButton) findViewById(R.id.editButton);
+        wordsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
+                Intent intent = new Intent(MainActivity.this, WordActivity.class);
+                intent.putExtra("word", words.get(i));
+                startActivity(intent);
+
+            }
+        });
+        wordsAdapter = new WordAdapter(this, R.layout.word_list, words);
+        wordsList.setAdapter(wordsAdapter);
+    }
+
+    private void loadWords() {
+        try {
+            words.clear();
+            int i=0;
+            for(Word n: Storage.getInstance().loadWords(this)) {
+
+                words.add(n);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        TextView word = (TextView) v.findViewById(R.id.word);
-        word.setText(getItem(position).getWord());
-
-        if (getItem(position).getIsPinned())
-            v.setBackgroundColor(Color.YELLOW);
-        else
-            v.setBackgroundColor(Color.WHITE);// to change the word cell color
-        return v;
     }
-
+    public static void update() {
+        wordsAdapter.notifyDataSetChanged();
+    }
 }
