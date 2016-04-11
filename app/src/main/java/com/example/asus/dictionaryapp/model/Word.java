@@ -49,5 +49,5 @@ public class Word implements Serializable {
 
     public boolean getIsPinned() {return isPinned;}
 
-    public void setPinned(boolean b) { this.isPinned = b;}
+    public void setPinned(boolean b) { this.isPinned = isPinned;}
 }
