@@ -3,11 +3,8 @@
  */
 package com.example.asus.dictionaryapp.adapters;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,32 +15,35 @@ import com.example.asus.dictionaryapp.R;
 import com.example.asus.dictionaryapp.model.Word;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 
 public class WordListAdapter extends ArrayAdapter<Word> {
+    int state =0;
+    //0 - not pin
+    //1 - pin
     public WordListAdapter(Context context, int resource, ArrayList<Word> objects){
         super(context, resource, objects);
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent){
         View v = convertView;
 
-        if (v == null) {
+        if(v == null) {
             LayoutInflater vi;
             vi = LayoutInflater.from(getContext());
             v = vi.inflate(R.layout.word_list, null);
         }
         TextView word = (TextView) v.findViewById(R.id.word);
         word.setText(getItem(position).getWord());
-
-        if (getItem(position).getIsPinned())
-            v.setBackgroundColor(Color.YELLOW);
+        if(state==1)
+            word.setTextColor(Color.RED);
         else
-            v.setBackgroundColor(Color.WHITE);// to change the word cell color
+            word.setTextColor(Color.GRAY);
         return v;
     }
 
+    public void setState(int state) {
+        this.state = state;
+    }
 }
