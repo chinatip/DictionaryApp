@@ -97,4 +97,8 @@ public class Storage {
         editor.putString(DB, wordJson);
         editor.commit();
     }
+    public void save(Context context,ArrayList<Word> words){
+        editor =  context.getSharedPreferences(DB, Context.MODE_PRIVATE).edit();
+        saveWordsJson(new Gson().toJson(words));
+    }
 }
